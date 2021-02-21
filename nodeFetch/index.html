@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+</head>
+<style>
+    * {
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .card-body {
+        background-color: #74b9ff;
+        height: 55vh;
+        width: 18%;
+        top: -98px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        align-items: center;
+        border-radius: 2%;
+    }
+  .card-body::before{
+    content: "";
+    position: absolute;
+    width: 133%;
+    top: 52%;
+    opacity: 0.3;
+    background-color: #fff;
+    height: 48vh;
+    border-radius: 63%;
+    animation: circleMove linear 4s infinite;
+  }
+  @keyframes circleMove {
+      from{
+          transform: rotate(0deg);
+      }
+      to{
+          transform: rotate(360deg);
+      }
+  }
+  .card-img{
+    position: relative;
+    top: -43px;
+    font-size: 56px;
+    color: #f1c40f;
+  }
+  .card-city{
+    position: relative;
+    top: 8px;
+    font-size: 21px;
+    font-weight: 700;
+  }
+  .fa-street-view{
+      animation: boyMove linear 4s  infinite ;
+      position: relative;
+      display: inline-block;
+  }
+  @keyframes boyMove {
+      0%{
+          right: 0px;
+      }
+      50%{
+          right: 20px;
+      }
+      100%{
+          right: 0px;
+      }
+  }
+  .card-date{
+    position:relative;
+    top: 18px;
+    text-transform: uppercase;
+  }
+  .card-temp{
+    position: absolute;
+    bottom: 57px;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  .card-temp2{
+    position: absolute;
+    bottom: 24px;
+    font-size: 13px;
+  }
+</style>
+
+<body>
+    <div class="container">
+        <div class="card-body">
+            <div class="card-img">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="card-city">
+                <i class="fas fa-street-view"></i><span id="city">Bihar,IN</span>
+            </div>
+            <div class="card-date"></div>
+            <div class="card-temp">{%tempVal%}</div>
+            <div class="card-temp2">MIN {%tempMin%} || MAX {%tempMax%}</div>
+        </div>
+    </div>
+</body>
+<script>
+    const cardDate=document.querySelector('.card-date');
+let weekend=new Array();
+weekend[0]="SUN";
+weekend[1]="MON";
+weekend[2]="TUE";
+weekend[3]="WED";
+weekend[4]="THU";
+weekend[5]="FRI";
+weekend[6]="SAT";
+let month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+// console.log(weekend);
+// WED || OCT || 10:49 AM
+const newDate=new Date();
+if (newDate.getHours()<=12) {
+    Hours=newDate.getHours()
+}
+else{
+    Hours=newDate.getHours()-12;
+}
+setInterval(() => {
+    cardDate.innerHTML=`${weekend[newDate.getDay()]} || ${month[newDate.getMonth()]} || ${Hours}:${newDate.getMinutes()}`
+
+    }, 1000);
+</script>
+</html>
